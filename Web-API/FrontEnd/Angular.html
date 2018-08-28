@@ -1,0 +1,26 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <script src="scripts/angular.min.js"></script>
+    <script src="App/app.module.js"></script>
+    <script src="App/main.js"></script>
+    <title></title>
+	<meta charset="utf-8" />
+</head>
+<body>
+    <div ng-app="">
+        <h1>Simple Angular</h1>
+        <p style="font-size:larger">Name</p>
+        <input type="text" ng-model="name" />
+        <h1> Hello {{name}}</h1>
+
+
+        <div ng-app="" ng-init="col = 'lightgreen'">
+            <p>Enter the colour name</p>
+
+            <input style="background-color:{{col}}" ng-model="col" value="{{col}}" />
+
+        </div>
+        </div>
+</body>
+</html>
