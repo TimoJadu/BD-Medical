@@ -82,6 +82,31 @@
 
             $scope.Start = function () {
                 $("#tblGrid").show();
+
+                for (var i = 1; i <= $scope.X; i++) {
+                    for (var j = 1; j <= $scope.Y; j++) {
+                        alert(j);
+                        //$http.get("http://localhost:4325/api/webapi/Get")
+                        //    .then(function successCallback(response) {
+                        //        document.getElementById('cell' + i + '+' + j).value = response.data.replace(/"/g, "");
+                        //    }, function errorCallback(response) {
+                        //        console.log("Unable to perform get request");
+                        //    });
+                        $.ajax({
+                            method: "GET",
+                            url: "http://localhost:4325/api/webapi/Get",
+                            success: function (response) {
+                                document.getElementById('cell' + i + '+' + j).value = response.replace(/"/g, "")
+                                console.log(data);                                
+                            },
+                            error: function (error_data) {
+                                console.log("error");
+                                console.log(error_data);
+                            }
+                        });
+                    };
+                };
+                
             };
             
             $scope.range = function (min, max, step) {
