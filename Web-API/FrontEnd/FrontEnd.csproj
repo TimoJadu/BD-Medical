@@ -106,8 +106,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Angular.html" />
-    <Content Include="Angular1.html" />
+    <Content Include="SinglePage.html" />
     <Content Include="App\app.module.js" />
     <Content Include="App\main.js" />
     <Content Include="scripts\ai.0.22.9-build00167.js" />

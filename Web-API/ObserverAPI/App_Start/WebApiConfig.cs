@@ -27,6 +27,12 @@ namespace ObserverAPI
                 defaults: new { id = RouteParameter.Optional }
             );
 
+            config.Routes.MapHttpRoute(
+                name: "Api",
+                routeTemplate: "api/{controller}/{action}/{id}",
+                defaults: new { id = RouteParameter.Optional }
+            );
+
             System.Web.Http.Cors.EnableCorsAttribute ec = new EnableCorsAttribute("*", "*", "*");
             config.EnableCors(ec);
         }

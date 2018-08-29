@@ -21,17 +21,7 @@ namespace Web_API.Controllers
         [ActionName("Generator")]
         [HttpGet]
         public string Generator()
-        {
-            //int[] arrY = new Int32[Y];           
-
-            //int i = -1;
-            //do
-            //{
-            //    ++i;
-            //    Thread.Sleep(rdDelay.Next(5, 10) * 1000);
-            //    return (rdNumber.Next(1, 100)).ToString();
-
-            //} while (i < Y);
+        {           
 
             Thread.Sleep(rdDelay.Next(5, 10) * 1000);
             return (rdNumber.Next(1, 100)).ToString();

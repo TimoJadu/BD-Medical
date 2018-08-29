@@ -1,6 +1,6 @@
 ﻿<html ng-app="testApp">
 <head>
-    <title>AngularJS $Http service tutorial example</title>
+    <title>Async Service & Events</title>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <style>
@@ -26,7 +26,7 @@
 </head>
 <body ng-controller="testController">
 
-    <h2>$http Service Tutorial</h2>
+    <h2>Async Service & Events</h2>
     <p>Number of Batches(Choose betw 1- 10)</p><input type="text" ng-model="X" id="txtNoofBatch"/>
     <br/>
     <p>Numbers per Batch(Choose betw 1- 10)</p><input type="text" ng-model="Y" id="txtNosinBatch"/><input type="button" ng-click="Start()" value="Start"/>
@@ -49,7 +49,7 @@
     <p hidden="hidden"> {{ response }}</p>
        
 
-    <button onclick="refreshFunction()" id="btnTimer">Timer</button>
+    <button onclick="refreshFunction()" id="btnTimer" hidden="hidden">Timer</button>
 
     <script>
         var cellArray = [];
@@ -87,19 +87,21 @@
                     };
                 };
                 
-                tempcellArray = cellArray.slice();
-                apiCall();
+                tempcellArray = cellArray.slice().reverse();
+                apiCall(tempcellArray[tempcellArray.length - 1]);
             };
 
-            function apiCall() {
+            function apiCall(_key) {
                 $.ajax({
                         method: "GET",
-                        url: "http://localhost:4325/api/webapi/Get",
+                        url: "http://localhost:4325/api/webapi/Get?_key=" + _key,
                         success: function (data) {
                             //document.getElementById('cell' + i + '+' + j).value = response.replace(/"/g, "")
-                            cellValueArray.push(data.replace(/"/g, ""));
+                            data.key = data.key.replace(/\s/g, "+");
+                            data.value= data.value.replace(/"/g, "");
+                            cellValueArray.push(data);
                             tempcellArray.pop()
-                            if (tempcellArray.length > 0) { apiCall(); }
+                            if (tempcellArray.length > 0) { apiCall(tempcellArray[tempcellArray.length - 1]); }
                         },
                         error: function (error_data) {
                             console.log("error");
@@ -122,6 +124,9 @@
                 cellValueArray = [];
                 $scope.X = 0;
                 $scope.Y = 0;
+                
+                window.location.reload(true);
+
                 $("#txtNoofBatch")[0].value = 0;
                 $("#txtNosinBatch")[0].value = 0;
                 $("#sumallCells")[0].value = 0;
@@ -136,8 +141,10 @@
         function refreshFunction() {
             //alert("Hey");
             for (var n = 0; n < cellArray.length; n++) {
-                if (cellValueArray.length > 0)
-                document.getElementById(cellArray[n]).value = cellValueArray[n];
+                if (cellValueArray.length - 1 >= n && cellValueArray.length > 0) {
+                    document.getElementById(cellValueArray[n].key).value = cellValueArray[n].value;
+                }
+                else { break;}
             };
 
             rowTotal();
@@ -149,7 +156,11 @@
             for (var i = 1; i <= X; i++) {
                 var sum = 0;
                 for (var j = 1; j <= Y; j++) {
-                    if (document.getElementById('cell' + i + '+' + j).value != "undefined") {
+                    if (document.getElementById('cell' + i + '+' + j).value == "undefined" || document.getElementById('cell' + i + '+' + j).value=="") {
+                        document.getElementById('cell' + i + '+' + j).value = 0;
+                        continue;
+                    }
+                    else {
                         sum += parseInt(document.getElementById('cell' + i + '+' + j).value);
                     }
                 }
@@ -162,7 +173,11 @@
             for (var j = 1; j <= Y; j++) {
                 var sum = 0;
                 for (var i = 1; i <= X; i++) {
-                    if (document.getElementById('cell' + i + '+' + j).value != "undefined") {
+                    if (document.getElementById('cell' + i + '+' + j).value == "undefined" || document.getElementById('cell' + i + '+' + j).value=="") {
+                        document.getElementById('cell' + i + '+' + j).value = 0;
+                        continue;
+                    }
+                    else {
                         sum += parseInt(document.getElementById('cell' + i + '+' + j).value);
                     }
                 }

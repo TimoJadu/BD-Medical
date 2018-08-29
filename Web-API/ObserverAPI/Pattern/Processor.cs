@@ -5,8 +5,7 @@ using System.Web;
 
 namespace ObserverAPI
 {
-    ///public delegate void StateChangeHandler(string newValue);
-
+    ///public delegate void StateChangeHandler(string newValue);    
     public class Processor
     {
         public Processor(Iobservable observable)

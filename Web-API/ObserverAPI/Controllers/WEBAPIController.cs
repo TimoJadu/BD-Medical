@@ -9,6 +9,7 @@ using System.IO;
 using ObserverAPI;
 using System.Web.Http.Cors;
 using System.Text.RegularExpressions;
+using Newtonsoft.Json;
 
 namespace ObserverAPI.Controllers
 {
@@ -20,7 +21,7 @@ namespace ObserverAPI.Controllers
         [HttpGet]
         [ActionName("Get")]
         [EnableCors("*", "*", "*")]
-        public string Get()
+        public wrapper Get(string _key)
         {
             //var i = movieservice.GetAll();
             //var client = new WebClient();
@@ -35,8 +36,12 @@ namespace ObserverAPI.Controllers
             observableGM.Value = GetResponse(observableGM.url);
             observableMM.Value = GetResponse(observableMM.url + Regex.Replace(observableGM.Value, @"[^0-9]",""));
 
-            return observableMM.Value.ToString();
-            //return observableGM.Value.ToString();
+            //return observableMM.Value.ToString();
+            wrapper wrp = new wrapper();
+            wrp.key = _key;
+            wrp.value = observableMM.Value.ToString();
+
+            return wrp;
         }
 
         [NonAction]
@@ -51,6 +56,14 @@ namespace ObserverAPI.Controllers
 
             return content.ToString();
         }
+    }
+
+    [Serializable]
+    [JsonObject]
+    public class wrapper
+    {
+        public string key { get; set; }
+        public string value { get; set; }
     }
 
     //public class Response
