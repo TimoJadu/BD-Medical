@@ -27,9 +27,9 @@
 <body ng-controller="testController">
 
     <h2>$http Service Tutorial</h2>
-    <p>Number of Batches</p><input type="text" ng-model="X"/>
+    <p>Number of Batches(Choose betw 1- 10)</p><input type="text" ng-model="X" id="txtNoofBatch"/>
     <br/>
-    <p>Numbers per Batch</p><input type="text" ng-model="Y" /><input type="button" ng-click="Start()" value="Start"/>
+    <p>Numbers per Batch(Choose betw 1- 10)</p><input type="text" ng-model="Y" id="txtNosinBatch"/><input type="button" ng-click="Start()" value="Start"/>
 
  
     <table id="tblGrid">
@@ -43,10 +43,10 @@
 
     <br/>
     <button ng-click="Reset()">Clear all</button>
-    <input type="text" ng-model="GeneratorNumber" />
+    <input type="text" ng-model="GeneratorNumber" hidden="hidden"/>
 
-    <button ng-click="getRequest(GeneratorNumber)">Test Rest</button>
-    <p> {{ response }}</p>
+    <button ng-click="getRequest(GeneratorNumber)" hidden="hidden">Test Rest</button>
+    <p hidden="hidden"> {{ response }}</p>
        
 
     <button onclick="refreshFunction()" id="btnTimer">Timer</button>
@@ -64,16 +64,6 @@
 
             
             //    Our GET request function
-            //$scope.getRequest = function (GeneratorNumber) {
-            //    console.log("I've been pressed!");
-            //    $http.get("http://localhost:2491/api/SecondaryWebAPI/Generator?Y=" + GeneratorNumber)
-            //    .then(function successCallback(response) {
-            //        $scope.response = response.data;
-            //    }, function errorCallback(response) {
-            //        console.log("Unable to perform get request");
-            //    });
-            //};
-
 
             $scope.getRequest = function (GeneratorNumber) {
                 console.log("I've been pressed!");
@@ -93,15 +83,7 @@
 
                 for (var i = 1; i <= $scope.X; i++) {
                     for (var j = 1; j <= $scope.Y;j++) {
-                        cellArray.push('cell' + i + '+' + j);
-                        //alert(j);
-                        //$http.get("http://localhost:4325/api/webapi/Get")
-                        //    .then(function successCallback(response) {
-                        //        document.getElementById('cell' + i + '+' + j).value = response.data.replace(/"/g, "");
-                        //    }, function errorCallback(response) {
-                        //        console.log("Unable to perform get request");
-                        //    });
-                        //
+                        cellArray.push('cell' + i + '+' + j);                        
                     };
                 };
                 
@@ -138,17 +120,13 @@
             $scope.Reset = function () {
                 $("input[type=text]").val("");
                 cellValueArray = [];
+                $scope.X = 0;
+                $scope.Y = 0;
+                $("#txtNoofBatch")[0].value = 0;
+                $("#txtNosinBatch")[0].value = 0;
+                $("#sumallCells")[0].value = 0;
                 //$("#tblGrid").hide();
             };
-        ////    Our POST request function
-        //$scope.postRequest = function () {
-        //    $http.post("http://urlforapi.com/", data)
-        //        .then(function successCallback(response) {
-        //            console.log("Successfully POST-ed data");
-        //        }, function errorCallback(response) {
-        //            console.log("POST-ing of data failed");
-        //        });
-        //};
 
         });
 
