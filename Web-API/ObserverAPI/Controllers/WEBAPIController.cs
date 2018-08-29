@@ -8,6 +8,7 @@ using System.Security.Policy;
 using System.IO;
 using ObserverAPI;
 using System.Web.Http.Cors;
+using System.Text.RegularExpressions;
 
 namespace ObserverAPI.Controllers
 {
@@ -18,6 +19,7 @@ namespace ObserverAPI.Controllers
 
         [HttpGet]
         [ActionName("Get")]
+        [EnableCors("*", "*", "*")]
         public string Get()
         {
             //var i = movieservice.GetAll();
@@ -31,10 +33,10 @@ namespace ObserverAPI.Controllers
             Processor observerMM = new Processor(observableMM);
 
             observableGM.Value = GetResponse(observableGM.url);
-            //observableMM.Value = GetResponse(observableMM.url+ observableGM.Value);
+            observableMM.Value = GetResponse(observableMM.url + Regex.Replace(observableGM.Value, @"[^0-9]",""));
 
-            //return observableMM.Value.ToString();
-            return observableGM.Value.ToString();
+            return observableMM.Value.ToString();
+            //return observableGM.Value.ToString();
         }
 
         [NonAction]

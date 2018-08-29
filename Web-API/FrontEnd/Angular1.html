@@ -33,11 +33,11 @@
 
  
     <table id="tblGrid">
-        <tr><th ng-repeat="m in range(1,Y)">Column {{m}}</th><th>Row Total</th></tr>
-        <tr ng-repeat="n in range(1,X)"><td ng-repeat="m in range(1,Y)"><input type="text" id="cell{{n}}+{{m}}"/></td>
+        <tr><th>Serial No</th><th ng-repeat="m in range(1,Y)">Column {{m}}</th><th>Row Total</th></tr>
+        <tr ng-repeat="n in range(1,X)"><td>{{n}}</td><td ng-repeat="m in range(1,Y)"><input type="text" id="cell{{n}}+{{m}}"/></td>
             <td><input type="text" id="row{{n}}" /></td></tr>
 
-        <tr><td ng-repeat="m in range(1,Y)"><input type="text" id="col{{m}}"/></td>
+        <tr><td>Column Total</td><td ng-repeat="m in range(1,Y)"><input type="text" id="col{{m}}"/></td>
 <td><input type="text" id="sumallCells" /></td></tr>
     </table>
 
@@ -49,15 +49,20 @@
     <p> {{ response }}</p>
        
 
-   
+    <button onclick="refreshFunction()" id="btnTimer">Timer</button>
 
     <script>
+        var cellArray = [];
+        var tempcellArray = [];
+        var cellValueArray = [];
+        var X=0;
+        var Y=0;
     var testApp = angular.module('testApp', []);
 
         testApp.controller('testController', function ($scope, $http) {
             $scope.home = "This is the homepage";
 
-
+            
             //    Our GET request function
             //$scope.getRequest = function (GeneratorNumber) {
             //    console.log("I've been pressed!");
@@ -80,33 +85,45 @@
                 });
             };
 
+            
             $scope.Start = function () {
                 $("#tblGrid").show();
+                X = $scope.X;
+                Y = $scope.Y;
 
                 for (var i = 1; i <= $scope.X; i++) {
-                    for (var j = 1; j <= $scope.Y; j++) {
-                        alert(j);
+                    for (var j = 1; j <= $scope.Y;j++) {
+                        cellArray.push('cell' + i + '+' + j);
+                        //alert(j);
                         //$http.get("http://localhost:4325/api/webapi/Get")
                         //    .then(function successCallback(response) {
                         //        document.getElementById('cell' + i + '+' + j).value = response.data.replace(/"/g, "");
                         //    }, function errorCallback(response) {
                         //        console.log("Unable to perform get request");
                         //    });
-                        $.ajax({
-                            method: "GET",
-                            url: "http://localhost:4325/api/webapi/Get",
-                            success: function (response) {
-                                document.getElementById('cell' + i + '+' + j).value = response.replace(/"/g, "")
-                                console.log(data);                                
-                            },
-                            error: function (error_data) {
-                                console.log("error");
-                                console.log(error_data);
-                            }
-                        });
+                        //
                     };
                 };
                 
+                tempcellArray = cellArray.slice();
+                apiCall();
+            };
+
+            function apiCall() {
+                $.ajax({
+                        method: "GET",
+                        url: "http://localhost:4325/api/webapi/Get",
+                        success: function (data) {
+                            //document.getElementById('cell' + i + '+' + j).value = response.replace(/"/g, "")
+                            cellValueArray.push(data.replace(/"/g, ""));
+                            tempcellArray.pop()
+                            if (tempcellArray.length > 0) { apiCall(); }
+                        },
+                        error: function (error_data) {
+                            console.log("error");
+                            console.log(error_data);
+                        }
+                    });
             };
             
             $scope.range = function (min, max, step) {
@@ -120,7 +137,8 @@
 
             $scope.Reset = function () {
                 $("input[type=text]").val("");
-                $("#tblGrid").hide();
+                cellValueArray = [];
+                //$("#tblGrid").hide();
             };
         ////    Our POST request function
         //$scope.postRequest = function () {
@@ -132,7 +150,56 @@
         //        });
         //};
 
-    });
+        });
+
+        //if (cellValueArray.length > 0)
+        setInterval(function () { document.getElementById("btnTimer").click(); }, 1000);
+
+        function refreshFunction() {
+            //alert("Hey");
+            for (var n = 0; n < cellArray.length; n++) {
+                if (cellValueArray.length > 0)
+                document.getElementById(cellArray[n]).value = cellValueArray[n];
+            };
+
+            rowTotal();
+            colTotal();
+            allTotal();
+        };
+
+        function rowTotal() {
+            for (var i = 1; i <= X; i++) {
+                var sum = 0;
+                for (var j = 1; j <= Y; j++) {
+                    if (document.getElementById('cell' + i + '+' + j).value != "undefined") {
+                        sum += parseInt(document.getElementById('cell' + i + '+' + j).value);
+                    }
+                }
+                document.getElementById('row' + i).value = sum;
+            }
+        };
+
+
+        function colTotal() {
+            for (var j = 1; j <= Y; j++) {
+                var sum = 0;
+                for (var i = 1; i <= X; i++) {
+                    if (document.getElementById('cell' + i + '+' + j).value != "undefined") {
+                        sum += parseInt(document.getElementById('cell' + i + '+' + j).value);
+                    }
+                }
+                document.getElementById('col' + j).value = sum;
+            }
+        };
+
+        function allTotal() {
+                var sum = 0;
+                for (var j = 1; j <= Y; j++) {
+                    sum += parseInt(document.getElementById('col' + j).value);
+                }                
+            
+                document.getElementById('sumallCells').value = sum;            
+        }
     </script>
 </body>
 
