@@ -59,9 +59,20 @@
 
 
             //    Our GET request function
+            //$scope.getRequest = function (GeneratorNumber) {
+            //    console.log("I've been pressed!");
+            //    $http.get("http://localhost:2491/api/SecondaryWebAPI/Generator?Y=" + GeneratorNumber)
+            //    .then(function successCallback(response) {
+            //        $scope.response = response.data;
+            //    }, function errorCallback(response) {
+            //        console.log("Unable to perform get request");
+            //    });
+            //};
+
+
             $scope.getRequest = function (GeneratorNumber) {
                 console.log("I've been pressed!");
-                $http.get("http://localhost:2491/api/SecondaryWebAPI/Generator?Y=" + GeneratorNumber)
+                $http.get("http://localhost:4325/api/webapi/Get")
                 .then(function successCallback(response) {
                     $scope.response = response.data;
                 }, function errorCallback(response) {

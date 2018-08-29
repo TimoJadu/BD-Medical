@@ -88,6 +88,5 @@ C:\subhajit\BD Medical\Web-API\Web-API\bin\Microsoft.Owin.Security.Google.xml
 C:\subhajit\BD Medical\Web-API\Web-API\bin\Microsoft.Owin.Security.Twitter.xml
 C:\subhajit\BD Medical\Web-API\Web-API\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 C:\subhajit\BD Medical\Web-API\Web-API\bin\System.Web.Http.Owin.xml
-C:\subhajit\BD Medical\Web-API\Web-API\obj\Debug\Web-API.csprojResolveAssemblyReference.cache
 C:\subhajit\BD Medical\Web-API\Web-API\obj\Debug\Web-API.dll
 C:\subhajit\BD Medical\Web-API\Web-API\obj\Debug\Web-API.pdb

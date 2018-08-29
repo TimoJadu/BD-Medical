@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web-API", "Web-API\Web-API.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FrontEnd", "FrontEnd\FrontEnd.csproj", "{9C48CD5E-B664-4980-B0E5-2545B46E3B94}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ObserverAPI", "ObserverAPI\ObserverAPI.csproj", "{13FCD147-5E1D-42B2-BED1-34EB3C2ED3F4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{9C48CD5E-B664-4980-B0E5-2545B46E3B94}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9C48CD5E-B664-4980-B0E5-2545B46E3B94}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9C48CD5E-B664-4980-B0E5-2545B46E3B94}.Release|Any CPU.Build.0 = Release|Any CPU
+		{13FCD147-5E1D-42B2-BED1-34EB3C2ED3F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{13FCD147-5E1D-42B2-BED1-34EB3C2ED3F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{13FCD147-5E1D-42B2-BED1-34EB3C2ED3F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{13FCD147-5E1D-42B2-BED1-34EB3C2ED3F4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

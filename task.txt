@@ -1,1 +1,30 @@
 create secondary web api
+
+consume the service
+
+create the 2nd web api
+
+implement the worker design pattern
+
+
+http://localhost:14325/api/WEBAPIController/Get
+http://localhost:2491/api/SecondaryWebAPI/Generator?Y=3
+
+
+calling the secondary api from primary api
+implement the observer pattern
+pass the value or notify the value to the frontend
+
+http://localhost:23838/api/WEBAPIController/Get
+
+http://localhost:14325/api/webapi
+
+ObservableClass observable = new ObservableClass();
+            ObserverClass observer = new ObserverClass(observable);
+            observable.Value = 10;
+
+
+multiplicand
+http://localhost:14325/api/webapi/Multiplier?multiplicand=98
+Generator
+http://localhost:14325/api/webapi/Generator

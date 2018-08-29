@@ -28,6 +28,5 @@ C:\subhajit\BD Medical\Web-API\FrontEnd\bin\Microsoft.AI.Web.xml
 C:\subhajit\BD Medical\Web-API\FrontEnd\bin\Microsoft.AI.WindowsServer.xml
 C:\subhajit\BD Medical\Web-API\FrontEnd\bin\Microsoft.ApplicationInsights.xml
 C:\subhajit\BD Medical\Web-API\FrontEnd\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-C:\subhajit\BD Medical\Web-API\FrontEnd\obj\Debug\FrontEnd.csprojResolveAssemblyReference.cache
 C:\subhajit\BD Medical\Web-API\FrontEnd\obj\Debug\FrontEnd.dll
 C:\subhajit\BD Medical\Web-API\FrontEnd\obj\Debug\FrontEnd.pdb
